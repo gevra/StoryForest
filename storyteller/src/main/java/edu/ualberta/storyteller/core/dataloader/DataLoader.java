@@ -259,6 +259,9 @@ public class DataLoader {
         int idxOfKeywords = Arrays.asList(cols).indexOf("keywords");
         int idxOfLda = Arrays.asList(cols).indexOf("LDA");
 
+        // added by gevra
+        int idxOfTimestamp = Arrays.asList(cols).indexOf("time");
+
         // read each line to create documents
         String line;
         int i = 0;
@@ -290,6 +293,10 @@ public class DataLoader {
                 d.segContent = content;
                 d.lda = lda;
                 d.language = "English";
+
+                // added by gevra
+                String timestamp = tokens[idxOfTimestamp];
+                d.publishTime = new Timestamp((long) Double.parseDouble(timestamp) * 1000);
 
                 // create document's keywords
                 String[] words = content.split("\\s+");
